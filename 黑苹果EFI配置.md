@@ -1,10 +1,11 @@
-## 基于OpenCore的AMD黑苹果EFI配置总结【windows平台】
+## 基于OpenCore的AMD黑苹果EFI配置总结
+- 锐龙2600 + MSI B450itx + BigSur11.0
 - 专业教程请参考[OpenCore官网](https://dortania.github.io/OpenCore-Install-Guide/)
 
 
 ### 成功安装的两个要素
-- macos镜像写入磁盘
-- 自定义EFI欺骗操作系统以为是原生的mac
+- MacOs镜像写入磁盘
+- 自定义EFI欺骗操作系统以为是原生的MAC
 &nbsp;
 
 ### [创建安装U盘](https://dortania.github.io/OpenCore-Install-Guide/installer-guide/winblows-install.html#downloading-macos)
@@ -28,19 +29,27 @@
     - 将`\OpenCore-0.6.3-DEBUG\X64`（64位操作系统）目录下的`EFI`文件夹拷贝到U盘根目录
     ![](./u.png)
 
-
+---
 ### EFI文件配置
-    不同电脑由于硬件的不同需要配置不同的EFI文件，注意某些硬件可能不支持macos系统，例如三星PM981 NVME硬盘，具体信息请阅读[OpenCore硬件设置](https://dortania.github.io/OpenCore-Install-Guide/macos-limits.html)
+不同电脑由于硬件的不同需要配置不同的EFI文件，注意某些硬件可能不支持macos系统，例如三星PM981 NVME硬盘，具体信息请阅读[OpenCore硬件设置](https://dortania.github.io/OpenCore-Install-Guide/macos-limits.html)
 
-- 基本文件处理
-- 添加符合自己机器硬件的驱动
-- 修改config.plist文件
+#### 基本文件处理
+
+#### 添加符合自己机器硬件的驱动
+
+#### 修改config.plist文件
 
 ### 已知Bug
-- 键盘大写字母有时失灵
 - icloud,imessage,facetime无法登陆apple id
+- 每次开机时会在efi目录下写入日志，可能是用的debug版本原因
+
 
 ### to do
 - 配置intel无线网卡驱动
 - OpenCore GUI设置
 - 尝试解决icloud登陆问题,是否是无效三码问题
+- 修改opencore为realse版本，加速开机，根据配置修改机型，iMac似乎需要支持集显的机型，虽然目前使用没有毛病，但是还是修改成iMacPro和MacPro7,1比较好
+----
+
+
+
