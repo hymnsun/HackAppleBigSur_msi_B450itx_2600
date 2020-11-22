@@ -2,12 +2,15 @@
 - 锐龙2600 + MSI B450itx + RX560 + BigSur11.0 + UEFI模式（非legacy）
 - [AMD BIOS设置](https://dortania.github.io/OpenCore-Install-Guide/AMD/zen.html#amd-bios-settings)
 - 专业教程请参考[OpenCore官网](https://dortania.github.io/OpenCore-Install-Guide/)
+-  icloud,imessage,facetime无法登陆账号使用，开机较慢
 
 
 ### 0. 成功安装的两个要素
 - MacOs镜像写入磁盘
 - 自定义EFI欺骗操作系统以为是原生的MAC
 &nbsp;
+
+
 
 ### 1. [创建安装U盘](https://dortania.github.io/OpenCore-Install-Guide/installer-guide/winblows-install.html#downloading-macos)
 
@@ -62,7 +65,7 @@
 
     - [NVMeFix](https://github.com/acidanthera/NVMeFix/releases)修复nvme硬盘
 
-    - [CtlnaAHCIPort](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip) 暂时不用，除非SATA有问题
+    - [CtlnaAHCIPort](https://github.com/dortania/OpenCore-Install-Guide/blob/master/extra-files/CtlnaAHCIPort.kext.zip) 
 
 - [`ACPI`目录](https://dortania.github.io/OpenCore-Install-Guide/ktext.html#ssdts): AMD b450主板只需要[`SSDT-PLUG`](https://dortania.github.io/Getting-Started-With-ACPI/Universal/plug.html)
 
@@ -73,12 +76,29 @@
 #### 2.3 [修改config.plist文件](https://dortania.github.io/OpenCore-Install-Guide/AMD/zen.html#starting-point)
 这部分十分重要，根据官方教程多看几遍，仔细修改参数，这里只简单介绍修改工具和amd kernel的替换。
 - 将`\OpenCore-0.6.3-DEBUG\Docs\Sample.plist`拷贝到u盘`EFI\OC`目录下,重新命名为`config.plist`
-- 下载[`ProperTree`](https://github.com/corpnewt/ProperTree)修改`config.plist`
-- 以管理员运行`\ProperTree-master\ProperTree-master\ProperTree.bat`,点击`File\OPEN`,选择`config.plist`文件打开
-- 之后选择`File\OC Clean Snapshot`，选择`EFI\OC文件夹`,自动生成符合之前添加的驱动的`config.plist`文件
-- 根据教程修改参数
-- [amd cpu的kernel替换](https://dortania.github.io/OpenCore-Install-Guide/AMD/zen.html#kernel)
-- SMBIOS设置
+- 下载[ProperTree](https://github.com/corpnewt/ProperTree)修改`config.plist`
+- 以管理员运行`\ProperTree-master\ProperTree-master\ProperTree.bat`,点击`File\OPEN`(<kbd>Ctrl</kbd>+<kbd>O</kbd>),选择`config.plist`文件打开
+- 之后选择`File\OC Clean Snapshot`(<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd>)，选择`EFI\OC文件夹`,自动生成符合之前添加的驱动的`config.plist`文件
+- 根据教程修改参数,以下只列出教程中需要重点修改的部分
+  - `Booter/Quirks`
+  - `DeviceProperties`
+  - `Kernel`
+    - `Emulate`
+    - ==Patch==：这部分需要用 [AMD CPU适用的patch](https://github.com/AMD-OSX/AMD_Vanilla)来替换,下载整个项目，选择对应cpu 型号（Ryzen对应17th）下的`patches.plist`文件，用已下载的`ProperTree`打开，复制`Kernel/Patch`部分。删除`config.plist`文件中的`Kernel/Patch`,在Kernel目录下粘贴`patches.plist`中的`Patch`。
+    - `Quirks`
+  - `Misc`
+    - `Debug`
+    - `Security`
+  - `NVRAM`
+    - `7C436110-AB2A-4BBB-A880-FE41995C9F82`
+      - ==boot-args==
+  - `PlatformInfo`:[三码设置](https://dortania.github.io/OpenCore-Install-Guide/AMD/zen.html#platforminfo)
+
+    - > you want to get a message back like: "Invalid Serial" or "Purchase Date not Validated"
+    - MacPro 默认独显输出，因此需要有独显
+    - iMac需要iGpu，但是我用iMac也没有问题
+    - MacPro7,1 可能会遇到休眠问题，待测试。使用本版本iMac的EFI暂时休眠正常
+
 
 ----
 
@@ -89,12 +109,8 @@
 - 这种方法需要电脑网卡正确配置，并且能够下载完整的BigSur系统，大约耗时1h左右。
 
 
-### 4. 已知Bug
-- icloud,imessage,facetime无法登陆apple id,可能是三码设置问题，争取实现登陆icloud
-- 每次开机时会在efi目录下写入日志，可能是用的debug版本原因，后期更换release版本
 
-
-### 5. to do
+### 4. to do
 - 更换release版本的oc引导
 - 配置intel无线网卡驱动
 - OpenCore GUI设置
