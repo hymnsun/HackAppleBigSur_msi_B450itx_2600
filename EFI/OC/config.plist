@@ -418,7 +418,7 @@
 			<key>PowerTimeoutKernelPanic</key>
 			<true/>
 			<key>ThirdPartyDrives</key>
-			<true/>
+			<false/>
 			<key>XhciPortLimit</key>
 			<true/>
 		</dict>
@@ -1668,7 +1668,7 @@
 				<key>SystemAudioVolume</key>
 				<data>Rg==</data>
 				<key>boot-args</key>
-				<string>debug=0x100 keepsyms=1 npci=0x2000</string>
+				<string>keepsyms=1 debug=0x100 npci=0x2000 alcid=1</string>
 				<key>run-efi-updater</key>
 				<string>No</string>
 				<key>csr-active-config</key>
@@ -1739,7 +1739,7 @@
 			<key>SystemMemoryStatus</key>
 			<string>Auto</string>
 			<key>MLB</key>
-			<string>C02948700QXJ0PGFB</string>
+			<string>F5K943104GUK3F71M</string>
 			<key>ProcessorType</key>
 			<integer>0</integer>
 			<key>ROM</key>
@@ -1747,11 +1747,11 @@
 			<key>SpoofVendor</key>
 			<true/>
 			<key>SystemProductName</key>
-			<string>iMac18,3</string>
+			<string>MacPro7,1</string>
 			<key>SystemSerialNumber</key>
-			<string>C02ZRLY4J1GJ</string>
+			<string>F5KZLZYTP7QM</string>
 			<key>SystemUUID</key>
-			<string>832A67B6-D9C0-4EA3-9110-9A4B7D78244F</string>
+			<string>C99852D7-CD27-430E-9A73-3917386BA425</string>
 		</dict>
 		<key>UpdateDataHub</key>
 		<true/>
