@@ -80,19 +80,21 @@
 - [amd cpu的kernel替换](https://dortania.github.io/OpenCore-Install-Guide/AMD/zen.html#kernel)
 - SMBIOS设置
 
+----
 
-#### 3. 安装系统
+
+### 3. 安装系统
 - 注意安装磁盘格式化为GUID格式，分配一个EFI分区，用于系统成功安装后将u盘中EFI文件拷贝到磁盘EFI分区内
 - 插入U盘，设置U盘为第一启动项，或者开机选择从U盘启动，进行OC引导界面，选择`install macos...`安装系统
 - 这种方法需要电脑网卡正确配置，并且能够下载完整的BigSur系统，大约耗时1h左右。
 
 
-### 3. 已知Bug
+### 4. 已知Bug
 - icloud,imessage,facetime无法登陆apple id,可能是三码设置问题，争取实现登陆icloud
 - 每次开机时会在efi目录下写入日志，可能是用的debug版本原因，后期更换release版本
 
 
-### 4. to do
+### 5. to do
 - 更换release版本的oc引导
 - 配置intel无线网卡驱动
 - OpenCore GUI设置
